@@ -6,11 +6,6 @@ class Mountain{
         this.Name = Name;
         this.Height = Height;
     }
-
-    public printInfo():void{
-        console.log(`Name: ${this.Name}`);
-        console.log(`Height: ${this.Height}`);
-    }
 }
 class MountainDatabase{
     mountains: Mountain[] = [
@@ -37,7 +32,7 @@ function findNameOfTallestMountain(mountains : Mountain): string{
         }
         goOn = runAgain();
     }
-//============================================================================================
+
 class Product{
     Name : string;
     Price : number;
@@ -54,11 +49,11 @@ class Products{
         new Product("Switch", 777)
     ];
     public calcAverageProductPrice(products : Product) : number{
-        let average : number = (products.Price[0] + products.Price[1] + products.Price[2]) / 3;
+        let average : number = (products[0].Price + products[1].Price + products[2].Price) / 3;
         return average;
     }
 }
-        let goOn2 : boolean = true;
+    let goOn2 : boolean = true;
     while(goOn2 = true){
         let pdb : Products = new Products();
         let p : Product[] = pdb.products;
@@ -78,15 +73,35 @@ class InventoryItem{
         this.Quantity=Quantity;
     }
 }
+let motor = new Product("motor", 10);
+let sensor = new Product("sensor", 12.50);
+let LED = new Product("LED", 1)
+
 class Inventory{
     inventoryItem : InventoryItem[] = [
-        // new InventoryItem("motor", 10.00, 10 ),
-        // new InventoryItem("sensor", 12.50, 4),
-        // new InventoryItem("LED", 1.00, 20)
+        new InventoryItem(motor, 10 ),
+        new InventoryItem(sensor, 4),
+        new InventoryItem(LED, 20)
     ];
 }
-
-//======================================================================
+function calcInventoryValue(inventory : InventoryItem) : number{
+    let motorTotal : number = motor.Price * inventory[0].quanity;
+    let sensorTotal : number = sensor.Price * inventory[1].quantity;
+    let LEDTotal : number = LED.Price * inventory[2].quantity;
+    let total : number = motorTotal + sensorTotal + LEDTotal;
+    return total;
+}
+    let goOn3 = true;
+    while(goOn3 = true){
+        let idb : Inventory = new Inventory();
+        let inv : InventoryItem[] = idb.inventoryItem;
+        for (let i = 0; i < inv.length; i++){
+            let total : number = calcInventoryValue(inv[i]);
+            console.log(total);
+        }
+        goOn3 = runAgain();
+    }
+    
 function runAgain():boolean{
     let input: string = prompt("Would you like to continue? y/n");
     if(input.toLowerCase() === "y"){
